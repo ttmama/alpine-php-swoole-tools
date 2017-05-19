@@ -17,9 +17,11 @@ RUN docker-php-ext-configure gd \
 # PHP REDIS EXTENSION FOR PHP 7.0
 #####################################
 USER root
-RUN  pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
-    &&  docker-php-ext-enable redis			
+RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS linux-headers \
+&& pecl install -o -f redis \
+&& rm -rf /tmp/pear \
+&& docker-php-ext-enable redis \			
+&& apk del .phpize-deps
 	
 #####################################
 # Composer:
