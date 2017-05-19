@@ -13,7 +13,14 @@ RUN docker-php-ext-configure gd \
         --with-freetype-dir=/usr/include && \
     docker-php-ext-install gd
 
-
+#####################################
+# PHP REDIS EXTENSION FOR PHP 7.0
+#####################################
+USER root
+RUN  pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  docker-php-ext-enable redis			
+	
 #####################################
 # Composer:
 #####################################
