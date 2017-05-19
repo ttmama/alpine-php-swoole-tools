@@ -1,5 +1,5 @@
 FROM registry.cn-qingdao.aliyuncs.com/ttmama/docker-alpine-php-swoole:latest
-RUN apk add --no-cache bash git vim jpeg freetype
+RUN apk add --no-cache bash git vim jpeg-dev freetype-dev
 RUN docker-php-ext-install pdo_mysql
 
 #####################################
@@ -9,8 +9,8 @@ RUN docker-php-ext-install pdo_mysql
 # Install the PHP gd library
 RUN docker-php-ext-configure gd \
         --enable-gd-native-ttf \
-        --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/lib && \
+        --with-jpeg-dir=/usr/include \
+        --with-freetype-dir=/usr/include && \
     docker-php-ext-install gd
 
 
